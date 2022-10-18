@@ -4,7 +4,8 @@ const Blog = require("../db/blogSchema");
 const listBlogs = asyncHandler(async (req, res) => {
   console.log("User id" + req.user._id);
   const blogs = await Blog.find({ user: req.user._id });
-  res.status(200).json(blogs);
+
+  res.render("blogs", { blogs: blogs });
 });
 const addBlog = asyncHandler(async (req, res) => {
   const { title, content } = req.body;
@@ -21,7 +22,7 @@ const addBlog = asyncHandler(async (req, res) => {
 const getBlogById = asyncHandler(async (req, res) => {
   const blog = await Blog.findById(req.params.id);
   if (blog) {
-    res.json(blog);
+    res.render("blog", { blog: blog });
   } else {
     res.status(404).json({ message: "Blog not found" });
   }
@@ -34,7 +35,8 @@ const deleteBlogById = asyncHandler(async (req, res) => {
     throw new Error("Could'nt Delete");
   }
   await blog.remove();
-  res.status(200).json({ message: "Blog removed" });
+  res.render("blogs", { blog: blog });
+  console.log("Blog Removed");
 });
 const updateBlogById = asyncHandler(async (req, res) => {
   const { title, content } = req.body;
@@ -49,7 +51,7 @@ const updateBlogById = asyncHandler(async (req, res) => {
     blog.title = title;
     blog.content = content;
     const updatedBlog = await blog.save();
-    res.json(updatedBlog);
+    res.render("blogs", { blog: blog });
   } else {
     res.status(400);
     throw new Error("Blog not found ");

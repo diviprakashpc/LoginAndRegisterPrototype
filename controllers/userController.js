@@ -31,7 +31,7 @@ const loginUser = asyncHandler(async (req, res) => {
   //   message: "Successfully Loggedin",
   //   user: req.user ? JSON.stringify(req.user) : "No user",
   // });
-  res.render("notes");
+  res.redirect("/api/blogs/");
 });
 
 module.exports = { registerUser, loginUser };

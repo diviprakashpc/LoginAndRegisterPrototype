@@ -6,16 +6,15 @@ const {
   deleteBlogById,
   updateBlogById,
 } = require("../controllers/blogController");
-const { protect } = require("../Middlewares/protect");
 const router = express.Router();
 
-router.route("/").get(protect,listBlogs);
-router.route("/createBlog").post(protect,addBlog);
+router.route("/").get(listBlogs);
+router.route("/createBlog").post(addBlog);
 
 router
   .route("/:id")
-  .get(protect,getBlogById)
-  .delete(protect,deleteBlogById)
-  .put(protect,updateBlogById);
+  .get(getBlogById)
+  .delete(deleteBlogById)
+  .put(updateBlogById);
 
 module.exports = router;
