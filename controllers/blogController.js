@@ -15,9 +15,11 @@ const addBlog = asyncHandler(async (req, res) => {
     user: req.user._id,
   });
   if (!newBlog) throw new Error("Error adding the blog");
-  res.status(200).json({
-    message: `Successfully added a new Blog with title ${newBlog.title}`,
-  });
+  console.log("ADDED")
+  res.redirect("/api/blogs/");
+  // res.status(200).json({
+  //   message: `Successfully added a new Blog with title ${newBlog.title}`,
+  // });
 });
 const getBlogById = asyncHandler(async (req, res) => {
   const blog = await Blog.findById(req.params.id);

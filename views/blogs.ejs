@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
+    <form action="/api/blogs/createBlog" method="get">
+        <button type="submit">Create Blog</button>
+    </form>
     <% blogs.forEach(function(blog){  %>
         <h1><%= blog.title %></h1>
         <p><%= blog.content.substring(0,200)+"  ..."%></p>
